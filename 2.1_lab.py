@@ -1,15 +1,16 @@
-a = input("1 num ")
-b = input("2 num ")
+# Нахождение НОД
 
-    
-q=1
+# Зацикливаем программу
+s = 0
+while s == 0:
+    a = input("1 number ")
+    b = input("2 number ")
 
-while q !=0:
-    q = a%b
-    a = b
-    b = q
+    q = 1
 
-print(a)
+    while q != 0:
+        q = a % b
+        a = b
+        b = q
 
-
-print(quit())
+    print(a)
