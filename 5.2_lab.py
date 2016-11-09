@@ -77,6 +77,7 @@ for n in [10,1000,2000,3000,4000,5000,10000]:
 	h.build_heap(arr)
 	for l in range(n):
 		h.extract_min()
+		
 	t2 = time.clock()
 	t = (t2 - t1)*1000
-	print "{0:7}".format(n)+":" + "{0:10.1f}".format(t)
+	print "{0:7}:".format(n) + "{0:10.1f}".format(t)

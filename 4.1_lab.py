@@ -1,29 +1,6 @@
-# File: BinaryTree.py
-# Реализация бинарных деревьев
-# Пример использования класса:
 
-# t = BinaryTree('root')
-# print(t.getRoot())
-# print(t.getLeftChild())
-
-# t.insertLeft('left')
-# print(t.getLeftChild())
-# print(t.getLeftChild().getRoot())
-
-# t.insertRight('right')
-# print(t.getRightChild())
-# print(t.getRightChild().getRoot())
-
-# t.getRightChild().setRoot('right root')
-# print(t.getRightChild().getRoot())
 
 class BinaryTree:
-
-# Метод __init__ вызывается каждый раз, когда создается объект
-# данного класса. В этом методе мы инициализируем новый объект.
-# У нашего класса три атрибута: root, left, right, которые могут
-# ссылаться на другие экземпляры класса BinaryTree.
-
     def __init__(self,rootNode):
         self.root = rootNode
         self.left = None
@@ -44,7 +21,12 @@ class BinaryTree:
             self.left = t
 
     def insertRight(self,newNode):
-        pass # Реализуйте метод
+        if self.right == None:
+            self.right = BinaryTree(newNode)
+        else:
+            t = BinaryTree(newNode)
+            t.right = self.right
+            self.right = t
 
     def getRoot(self):
         pass # Реализуйте метод
@@ -57,6 +39,7 @@ class BinaryTree:
 
     def setRoot(self,obj):
         pass # Реализуйте метод
+
 
 t = BinaryTree('root')
 print(t.getRoot())
