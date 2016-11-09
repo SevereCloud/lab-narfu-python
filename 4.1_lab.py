@@ -29,16 +29,16 @@ class BinaryTree:
             self.right = t
 
     def getRoot(self):
-        pass # Реализуйте метод
+        return self.root
 
     def getRightChild(self):
-        pass # Реализуйте метод
+        return self.right
 
     def getLeftChild(self):
-        pass # Реализуйте метод
+        return self.left
 
     def setRoot(self,obj):
-        pass # Реализуйте метод
+        self.root = obj 
 
 
 t = BinaryTree('root')
