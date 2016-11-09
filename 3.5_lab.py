@@ -62,28 +62,13 @@ for n in [10, 1000, 2000, 3000, 4000, 5000, 10000]:
         arr.append(random.randint(0, 100))
 
     t1 = time.clock()
-
     insertionsort(arr)
-
     t2 = time.clock()
     it = (t2 - t1) * 1000
 
     t1 = time.clock()
-
     mergesort(arr)
-
     t2 = time.clock()
     mt = (t2 - t1) * 1000
 
     print "{0:7}:".format(n) + "{0:10.1f}".format(it) + "{0:10.1f}".format(mt)
-
-    #import timeit
-    # for i in [10,1000,2000,3000,4000,5000,10000]:
-        # print "{0:7}".format(i)+":" + "{0:10.1f}".format((timeit.timeit("insertionsort(rand(i))", setup = "from __main__ import insertionsort; from __main__ import rand; i = "+str(i),number = 1)) * 1000) + "{0:10.1f}".format((timeit.timeit("mergesort(rand(i))", setup = "from __main__ import mergesort; from __main__ import rand; i = "+str(i),number = 1)) * 1000)
-        # print str(i) + ": " +
-        # str(round((timeit.timeit("insertionsort(rand(i))", setup = "from
-        # __main__ import insertionsort; from __main__ import rand; i =
-        # "+str(i),number = 1)) * 1000, 1)) +" "+
-        # str(round((timeit.timeit("mergesort(rand(i))", setup = "from __main__
-        # import mergesort; from __main__ import rand; i = "+str(i),number =
-        # 1)) * 1000, 1))
