@@ -1,12 +1,24 @@
 {
     "version": "0.2.0",
-    "configurations": [
-        {
+    "configurations": [{
             "name": "Python",
             "type": "python",
             "request": "launch",
             "stopOnEntry": true,
             "pythonPath": "${config.python.pythonPath}",
+            "program": "${file}",
+            "debugOptions": [
+                "WaitOnAbnormalExit",
+                "WaitOnNormalExit",
+                "RedirectOutput"
+            ]
+        },
+        {
+            "name": "Python34",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": true,
+            "pythonPath": "C:\\Users\\SevereCloud\\AppData\\Local\\Programs\\Python\\Python35-32\\python.exe",
             "program": "${file}",
             "debugOptions": [
                 "WaitOnAbnormalExit",
