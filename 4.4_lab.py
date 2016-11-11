@@ -1,7 +1,6 @@
 import random
 import operator
 
-
 class BinaryTree:
 
     def __init__(self, rootNode):
@@ -144,3 +143,4 @@ while s == 0:
     print (t)
     tt = buildExprTree(str(t))
     print (evalExprTree(tt).result)
+    raw_input ()
