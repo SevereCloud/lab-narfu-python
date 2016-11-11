@@ -72,7 +72,7 @@ class BST:
             self.parent = None
             return node
 
-    '''def __str__(self):
+    def __str__(self):
         if self.root is None: return '<empty tree>'
         def recurse(node):
             if node is None: return [], 0, 0
@@ -89,9 +89,9 @@ class BST:
             label = label.center(middle, '.')
             if label[0] == '.': label = ' ' + label[1:]
             if label[-1] == '.': label = label[:-1] + ' '
-            lines = [' ' * left_pos + label + ' ' * (right_width - right_pos), ' ' * left_pos + '/' + ' ' * (middle-2) + '\\' + ' ' * (right_width - right_pos)] + \ [left_line + ' ' * (width - left_width - right_width) + right_line for left_line, right_line in zip(left_lines, right_lines)]
+            lines = [' ' * left_pos + label + ' ' * (right_width - right_pos), ' ' * left_pos + '/' + ' ' * (middle-2) + '\\' + ' ' * (right_width - right_pos)] + [left_line + ' ' * (width - left_width - right_width) + right_line for left_line, right_line in zip(left_lines, right_lines)]
             return lines, pos, width
-        return '\n'.join(recurse(self.root) [0])'''
+        return '\n'.join(recurse(self.root) [0])
 
 class BSTnode:
     # Класс отдельного узла двоичного дерева.
