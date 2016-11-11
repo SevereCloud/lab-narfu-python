@@ -1,12 +1,14 @@
 import random
 
+
 class BinaryTree:
-	def __init__(self,rootNode):
+
+	def __init__(self, rootNode):
 		self.root = rootNode
 		self.left = None
 		self.right = None
 
-	def insertLeft(self,newNode):
+	def insertLeft(self, newNode):
 		if self.left == None:
 			self.left = BinaryTree(newNode)
 		else:
@@ -14,7 +16,7 @@ class BinaryTree:
 			t.left = self.left
 			self.left = t
 
-	def insertRight(self,newNode):
+	def insertRight(self, newNode):
 		if self.right == None:
 			self.right = BinaryTree(newNode)
 		else:
@@ -31,8 +33,8 @@ class BinaryTree:
 	def getLeftChild(self):
 		return self.left
 
-	def setRoot(self,obj):
-		self.root = obj 
+	def setRoot(self, obj):
+		self.root = obj
 
 
 def buildExprTree(s):
@@ -62,49 +64,54 @@ def buildExprTree(s):
 
 
 class randomExpr():
+
 	def __init__(self):
-		self.o = ['+', '-',  '*', '/']
+		self.o = [' + ', ' - ',  ' * ', ' / ']
 		self.s = ''
-		self.i = random.randint(2, 10)
-		if random.randint(0, 1) == 0:
-			self.num()
+		self.ops = random.randint(1, 10)
+		self.op = self.ops
+		self.path = 0
+		self.currentpath = 0
+		self.exp()
+
+	def exp(self):
+		self.s += '( '
+		self.path += 1
+		self.currentpath += 1
+
+		if self.op > 1 and self.ops > self.path:
+			if random.randint(0, 1) == 0:
+				self.number()
+				self.operator()
+			else:
+				self.exp()
+				self.operator()
 		else:
-			self.part()
+			self.number()
+			self.operator()
 
+		self.s += ' )'
+		self.currentpath -= 1
 
-	def num(self):
+	def number(self):
 		self.s += str(random.randint(1, 50))
-		self.i -= 1
-
-		if self.i > 0:
-			self.operator()
-
-	def part(self):
-		self.s += '('
-		self.num()
-		self.s += ')'
-
-		if self.i > 0:
-			self.operator()
 
 	def operator(self):
-		self.s += self.o [random.randint(0, len(self.o)-1)]
+		self.s += self.o[random.randint(0, len(self.o) - 1)]
+		self.op -= 1
 
-		if self.i == 1:
-			self.num()
+		if self.ops == self.path or self.op == 1:
+			self.number()
 		else:
-			r = random.randint(0, 2)
-			if r == 0:
-				self.num()
-			elif r == 1:
-				self.part()
-			else:
-				self.s += str(random.randint(1, 50))
-				self.i -= 1
+			self.exp()
 
 
 
 t = buildExprTree("( ( 9 + 3 ) * 6 )")
 
 for i in range(50):
-	print randomExpr().s
+	t = randomExpr()
+	print t.s
+	tt = buildExprTree(t.s)
+	print 'step'
+	
