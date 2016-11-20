@@ -41,6 +41,27 @@ class BinaryTree:
         self.root = obj 
 
 
+    def draw(self):
+        s = []
+        self.i = 0
+        self.ii = 0
+        def dis(obj):
+            s.append(str(obj.root))
+            t = (' '*self.i)+str(obj.root) +':\n'
+            self.i += 1
+            ii = self.i
+            if obj.left != None:
+                t +=(' '*self.i)+ dis(obj.left)
+                self.i = ii
+            if obj.right != None:
+                t +=(' '*self.i)+ dis(obj.right)
+            return t
+
+        return str(dis(self))
+
+        
+
+
 t = BinaryTree('root')
 print(t.getRoot())
 print(t.getLeftChild())
@@ -55,3 +76,5 @@ print(t.getRightChild().getRoot())
 
 t.getRightChild().setRoot('right root')
 print(t.getRightChild().getRoot())
+
+print(t.draw())

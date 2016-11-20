@@ -29,6 +29,7 @@ class BinaryTree:
 	def getRightChild(self):
 		return self.right
 
+
 	def getLeftChild(self):
 		return self.left
 

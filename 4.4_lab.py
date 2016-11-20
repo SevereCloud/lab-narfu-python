@@ -36,6 +36,27 @@ class BinaryTree:
     def setRoot(self, obj):
         self.root = obj
 
+    def __str__(self):
+        self.i = 0
+        def dis(obj):
+            t =''
+            
+            ii = self.i
+
+            if obj.left != None:
+                self.i += 1
+                t += dis(obj.left)
+
+            t += ('.'*ii)+str(obj.root) +'\n'
+
+            self.i = ii
+            if obj.right != None:
+                self.i += 1
+                t +=dis(obj.right)
+            return t
+
+        return str(dis(self))
+
 
 def buildExprTree(s):
     expr = s.split()
@@ -61,6 +82,8 @@ def buildExprTree(s):
         else:
             raise ValueError
     return tree
+
+
 
 
 class evalExprTree:
@@ -142,5 +165,8 @@ while s == 0:
     t = randomExpr()
     print (t)
     tt = buildExprTree(str(t))
+    exec ('result =' + str(t))
+    print (tt) 
     print (evalExprTree(tt).result)
-    raw_input ()
+    
+    assert (evalExprTree(tt).result == result)
