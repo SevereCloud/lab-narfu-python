@@ -1,3 +1,4 @@
+# Сортировка вставками
 def insertionsort (s):
         for i in range(len(s)):
                 ii=i

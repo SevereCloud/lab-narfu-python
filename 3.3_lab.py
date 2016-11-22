@@ -1,3 +1,4 @@
+# РЎРѕР·РґР°РЅРёРµ СЂР°РЅРґРѕРјРЅС‹С… СЃРїРёСЃРєРѕРІ
 import random
 
 def insertionsort (s):
@@ -20,9 +21,9 @@ def mergesort (s):
         mergesort(left)
         mergesort(right)
 
-        i=0 #номер в левом
-        j=0 #номер в правом
-        k=0 #номер элемента в масиве
+        i=0 #РЅРѕРјРµСЂ РІ Р»РµРІРѕРј
+        j=0 #РЅРѕРјРµСЂ РІ РїСЂР°РІРѕРј
+        k=0 #РЅРѕРјРµСЂ СЌР»РµРјРµРЅС‚Р° РІ РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРЅРѕРј РјР°СЃРёРІРµ
         while i<len(left) and j<len(right):
             if left[i]<right[j]:
                 s[k]=left[i]
@@ -54,9 +55,9 @@ def rand (n):
 
 s = 0
 while s==0:
-    L = rand(input("Кол-во элементов "))
+    L = rand(input("Number "))
 
-    print("Список "+str(L))
+    print("Array "+str(L))
 
     print("merge",mergesort(L))
     print("insertion",insertionsort(L))

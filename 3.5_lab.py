@@ -1,3 +1,4 @@
+#Тестирование 
 import random
 import time
 

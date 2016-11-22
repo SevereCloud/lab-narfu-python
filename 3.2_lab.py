@@ -1,3 +1,4 @@
+#Сортировка слиянием
 def mergesort(s):
     print("Splitting ",s)
     if len(s)>1:
