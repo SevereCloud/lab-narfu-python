@@ -1,18 +1,17 @@
+
 # Поиск наибольшего числа
 
 # Зацикливаем программу
-s = 0
-while s == 0:
+while True:
     #Спрашиваем кол-во чисел
-    n = input("quantity: ")
-    max = 0
-
+    N = input("quantity: ")
+    MAX = 0
     #Запрашиваем числа n раз
-    for i in range(n):
+    for i in range(N):
         a = input("number: ")
-        if a > max:
-            max = a
+        if a > MAX:
+            MAX = a
 
-    print("max: " + str(max))
+    print("max: " + str(MAX))
 
 print(quit())

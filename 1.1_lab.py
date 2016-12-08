@@ -1,16 +1,16 @@
-# Поиск числа фибоначи
+
+"""
+Поиск числа фибаначи
+"""
 
 # Зацикливаем программу
-s = 0
-while s == 0:
-    n = input('number: ')
-    f = 0
-    f1 = 0
-    f2 = 1
-
-    for i in range(n):
-        f = f1 + f2
-        f2 = f1
-        f1 = f
-
-    print (f)
+while True:
+    N = int(input('number: '))
+    F = 0
+    F1 = 0
+    F2 = 1
+    for i in range(N):
+        F = F1 + F2
+        F2 = F1
+        F1 = F
+    print(F)

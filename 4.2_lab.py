@@ -43,39 +43,39 @@
 
 
 class BinaryTree:
-	def __init__(self,rootNode):
-		self.root = rootNode
-		self.left = None
-		self.right = None
+    def __init__(self,rootNode):
+        self.root = rootNode
+        self.left = None
+        self.right = None
 
-	def insertLeft(self,newNode):
-		if self.left == None:
-			self.left = BinaryTree(newNode)
-		else:
-			t = BinaryTree(newNode)
-			t.left = self.left
-			self.left = t
+    def insertLeft(self,newNode):
+        if self.left == None:
+            self.left = BinaryTree(newNode)
+        else:
+            t = BinaryTree(newNode)
+            t.left = self.left
+            self.left = t
 
-	def insertRight(self,newNode):
-		if self.right == None:
-			self.right = BinaryTree(newNode)
-		else:
-			t = BinaryTree(newNode)
-			t.right = self.right
-			self.right = t
+    def insertRight(self,newNode):
+        if self.right == None:
+            self.right = BinaryTree(newNode)
+        else:
+            t = BinaryTree(newNode)
+            t.right = self.right
+            self.right = t
 
-	def getRoot(self):
-		return self.root
+    def getRoot(self):
+        return self.root
 
-	def getRightChild(self):
-		return self.right
+    def getRightChild(self):
+        return self.right
 
-	def getLeftChild(self):
-		return self.left
+    def getLeftChild(self):
+        return self.left
 
-	def setRoot(self,obj):
-		self.root = obj 
-	
+    def setRoot(self,obj):
+        self.root = obj 
+    
     def __str__(self):
         if self.root is None: return '<empty tree>'
         def recurse(node):
@@ -99,32 +99,32 @@ class BinaryTree:
 
 
 def buildExprTree(s):
-	expr = s.split()
-	# Используем список stack в качестве стека для возврата к
-	# родителю текущего узла. Для этого используем методы списка
-	# append() и pop()
-	stack = []
-	tree = BinaryTree('')
-	stack.append(tree)
-	currentTree = tree
-	for i in expr:
-		if i == '(':
-			currentTree.insertLeft('')
-			stack.append(currentTree)
-			currentTree = currentTree.getLeftChild()
-		elif i not in ['+', '-', '*', '/', ')']:
-			currentTree.setRoot(i)
-			currentTree = stack.pop()
-		elif i in ['+', '-', '*', '/']:
-			currentTree.setRoot(i)
-			currentTree.insertRight('')
-			stack.append(currentTree)
-			currentTree = currentTree.getRightChild()
-		elif i == ')':
-			currentTree = stack.pop()
-		else:
-			raise ValueError
-	return tree
+    expr = s.split()
+    # Используем список stack в качестве стека для возврата к
+    # родителю текущего узла. Для этого используем методы списка
+    # append() и pop()
+    stack = []
+    tree = BinaryTree('')
+    stack.append(tree)
+    currentTree = tree
+    for i in expr:
+        if i == '(':
+            currentTree.insertLeft('')
+            stack.append(currentTree)
+            currentTree = currentTree.getLeftChild()
+        elif i not in ['+', '-', '*', '/', ')']:
+            currentTree.setRoot(i)
+            currentTree = stack.pop()
+        elif i in ['+', '-', '*', '/']:
+            currentTree.setRoot(i)
+            currentTree.insertRight('')
+            stack.append(currentTree)
+            currentTree = currentTree.getRightChild()
+        elif i == ')':
+            currentTree = stack.pop()
+        else:
+            raise ValueError
+    return tree
 
 t = buildExprTree("( ( 9 + 3 ) * 6 )")
 

@@ -42,14 +42,14 @@ def mergesort (s):
             s[k]=right[j]
             j=j+1
             k=k+1
-	
+    
     return s
 
 def rand (n):
     arr = []
 
     for i in range(0, n): arr.append(random.randint(0, 1000))
-    	
+        
     return arr
 
 

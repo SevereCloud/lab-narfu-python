@@ -1,3 +1,4 @@
+
 #Тестирование 
 import random
 import time
@@ -49,14 +50,6 @@ def insertionsort(s):
     return s
 
 
-def rand(n):
-    arr = []
-    for i in range(0, n):
-        arr.append(random.randint(0, 100))
-
-    return arr
-
-
 for n in [10, 1000, 2000, 3000, 4000, 5000, 10000]:
     arr = []
     for i in range(n):
@@ -72,4 +65,4 @@ for n in [10, 1000, 2000, 3000, 4000, 5000, 10000]:
     t2 = time.clock()
     mt = (t2 - t1) * 1000
 
-    print "{0:7}:".format(n) + "{0:10.1f}".format(it) + "{0:10.1f}".format(mt)
+    print("{0:7}:".format(n) + "{0:10.1f}".format(it) + "{0:10.1f}".format(mt))
