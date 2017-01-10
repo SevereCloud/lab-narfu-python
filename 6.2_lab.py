@@ -1,3 +1,13 @@
+def height(node):
+    """Высота узла node"""
+    if node is None:
+        return -1
+    else:
+        return node.height
+
+def update_height(node):
+    """Обновление высоты node"""
+    node.height = max(height(node.left), height(node.right)) + 1
 
 class BST:
     """Вставить элемент с ключем k"""
@@ -16,20 +26,15 @@ class BST:
                     if node.left is None:
                         node.left = new
                         new.parent = node
-                        update_height(node.left)
-                        update_height(node)
                         break
                     node = node.left
                 else:
                     if node.right is None:
                         node.right = new
                         new.parent = node
-                        update_height(node.right)
-                        update_height(node)
                         break
                     node = node.right
-
-        update_height(self.root)
+        self.rebalance(new)
         return new
 
     def find(self, k):
@@ -44,7 +49,8 @@ class BST:
                 node = node.right
         return None
 
-    def extarct_min(self):
+    def extract_min(self):
+        """Вытаскиваем самый маленький элемент"""
         if self.root is None:
             return None
         else:
@@ -57,155 +63,71 @@ class BST:
                 self.root = node.right
             if node.right is not None:
                 node.right.parent = node.parent
-            self.left = None
-            self.right = None
-            self.parent = None
+            node.left = None
+            node.right = None
+            node.parent = None
             return node
 
     def left_rotate(self, node):
-        """Малый левый поворот"""
-        tmp = node
-
-        return_node = node.left
-        return_node.parent = None
-
-        tmp.left = return_node.right
-        tmp.left.parent = tmp
-
-        return_node.right = tmp
-        return_node.right.parent = return_node
-
-        update_height(return_node.right)
-        update_height(return_node)
-
-        return return_node
-
+        """Левый поворот node"""
+        tmp = node.right
+        tmp.parent = node.parent
+        if tmp.parent is None:
+            self.root = tmp
+        else:
+            if tmp.parent.left is node:
+                tmp.parent.left = tmp
+            elif tmp.parent.right is node:
+                tmp.parent.right = tmp
+        node.right = tmp.left
+        if node.right is not None:
+            node.right.parent = node
+        tmp.left = node
+        node.parent = tmp
+        update_height(node)
+        update_height(tmp)
 
     def right_rotate(self, node):
-        """Малый правый поворот"""
-        tmp = node
-
-        return_node = node.right
-        return_node.parent = None
-
-        tmp.right = return_node.left
-        tmp.right.parent = tmp
-
-        return_node.left = tmp
-        return_node.left.parent = return_node
-
-        update_height(return_node.left)
-        update_height(return_node)
-
-        return return_node
-
-
+        """Правый поворот node"""
+        tmp = node.left
+        tmp.parent = node.parent
+        if tmp.parent is None:
+            self.root = tmp
+        else:
+            if tmp.parent.left is node:
+                tmp.parent.left = tmp
+            elif tmp.parent.right is node:
+                tmp.parent.right = tmp
+        node.left = tmp.right
+        if node.left is not None:
+            node.left.parent = node
+        tmp.right = node
+        node.parent = tmp
+        update_height(node)
+        update_height(tmp)
 
     def rebalance(self, node):
-        A = node
-        F = A.parent #allowed to be NULL
-        if node.balance() == -2:
-            if node.right.balance() <= 0:
-                """Rebalance, case RRC """
-                B = A.right
-                C = B.right
-                assert (not A is None and not B is None and not C is None)
-                A.right = B.left
-                if A.right:
-                    A.right.parent = A
-                B.left = A
-                A.parent = B
-                if F is None:
-                    self.root = B
-                    self.root.parent = None
+        """Ребаланс node"""
+        while node is not None:
+            update_height(node)
+            if height(node.left) >= 2 + height(node.right):
+                if height(node.left.left) >= height(node.left.right):
+                    self.right_rotate(node)
                 else:
-                    if F.right == A:
-                        F.right = B
-                    else:
-                        F.left = B
-                    B.parent = F
-                update_height(A)
-                update_height(B.parent)
-            else:
-                """Rebalance, case RLC """
-                B = A.right
-                C = B.left
-                assert (not A is None and not B is None and not C is None)
-                B.left = C.right
-                if B.left:
-                    B.left.parent = B
-                A.right = C.left
-                if A.right:
-                    A.right.parent = A
-                C.right = B
-                B.parent = C
-                C.left = A
-                A.parent = C
-                if F is None:
-                    self.root = C
-                    self.root.parent = None
+                    self.left_rotate(node.left)
+                    self.right_rotate(node)
+            elif height(node.right) >= 2 + height(node.left):
+                if height(node.right.right) >= height(node.right.left):
+                    self.left_rotate(node)
                 else:
-                    if F.right == A:
-                        F.right = C
-                    else:
-                        F.left = C
-                    C.parent = F
-                update_height(A)
-                update_height(B)
-        else:
-            #assert(node.balance() == +2)
-            if node.left.balance() >= 0:
-                B = A.left
-                C = B.left
-                """Rebalance, case LLC """
-                assert (not A is None and not B is None and not C is None)
-                A.left = B.right
-                if (A.left):
-                    A.left.parent = A
-                B.right = A
-                A.parent = B
-                if F is None:
-                    self.root = B
-                    self.root.parent = None
-                else:
-                    if F.right == A:
-                        F.right = B
-                    else:
-                        F.left = B
-                    B.parent = F
-                update_height(A)
-                update_height(B.parent) 
-            else:
-                B = A.left
-                C = B.right
-                """Rebalance, case LRC """
-                assert (not A is None and not B is None and not C is None)
-                A.left = C.right
-                if A.left:
-                    A.left.parent = A
-                B.right = C.left
-                if B.right:
-                    B.right.parent = B
-                C.left = B
-                B.parent = C
-                C.right = A
-                A.parent = C
-                if F is None:
-                    self.root = C
-                    self.root.parent = None
-                else:
-                    if (F.right == A):
-                        F.right = C
-                    else:
-                        F.left = C
-                    C.parent = F
-                update_height(A)
-                update_height(B)
+                    self.right_rotate(node.right)
+                    self.left_rotate(node)
+            node = node.parent
+
 
     def __str__(self):
         if self.root is None:
             return '<empty tree>'
-
         def recurse(node):
             if node is None:
                 return [], 0, 0
@@ -230,29 +152,12 @@ class BST:
 
 
 class BSTnode:
-
+    """Класс узла"""
     def __init__(self, key):
         self.key = key
         self.left = None
         self.right = None
         self.parent = None
-        self.height = 1
-
-    def balance(self):
-        return (self.left.height if self.left else -1) - (self.right.height if self.right else -1)
-
-def height(node):
-    if node is None:
-        return -1
-    else:
-        update_height(node)
-        return node.height
-
-def update_height(node):
-    node.height = max(height(node.left), height(node.right)) + 1
-    if node.parent is None == False:
-        update_height(node.parent)
-
 
 
 def test():
@@ -265,8 +170,5 @@ def test():
         tree.insert(item)
         print()
         print(tree)
-    tree.rebalance(tree.root)
-    print()
-    print(tree)
 
 test()
